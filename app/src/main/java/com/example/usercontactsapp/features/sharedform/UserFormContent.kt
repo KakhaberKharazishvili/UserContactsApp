@@ -16,6 +16,7 @@ import com.example.usercontactsapp.R
 
 @Composable
 fun UserFormContent(
+    modifier: Modifier = Modifier,
     firstName: String,
     onFirstNameChange: (String) -> Unit,
     lastName: String,
@@ -28,14 +29,10 @@ fun UserFormContent(
     onBirthDateChange: (String) -> Unit,
     imageUri: Uri?,
     onPickImage: () -> Unit,
-    onSave: () -> Unit,
-    modifier: Modifier = Modifier
+    onSave: () -> Unit
 ) {
     Column(
-        modifier = Modifier
-            .padding(16.dp)
-            .fillMaxSize(),
-        verticalArrangement = Arrangement.spacedBy(12.dp)
+        modifier = modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         OutlinedTextField(
             value = firstName,
