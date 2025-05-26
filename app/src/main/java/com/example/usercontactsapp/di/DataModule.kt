@@ -6,6 +6,7 @@ import com.example.usercontactsapp.data.local.AppDatabase
 import com.example.usercontactsapp.data.local.UserDao
 import org.koin.dsl.module
 import com.example.usercontactsapp.data.repository.UserRepository
+import com.example.usercontactsapp.data.repository.UserRepositoryImpl
 
 val dataModule = module {
     single {
@@ -15,5 +16,5 @@ val dataModule = module {
 
     single<UserDao> { get<AppDatabase>().userDao() }
 
-    single { UserRepository(get()) }
+    single<UserRepository> { UserRepositoryImpl(get()) }
 }

@@ -1,4 +1,4 @@
-package com.example.usercontactsapp.ui.screen
+package com.example.usercontactsapp.features.userinfo
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -11,17 +11,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.example.usercontactsapp.R
-import com.example.usercontactsapp.data.navigation.UserEdit
-import com.example.usercontactsapp.ui.viewmodel.UserViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun UserInfoScreen(
-    navController: NavController, viewModel: UserViewModel = koinViewModel()
+    onEdit: () -> Unit, viewModel: UserInfoViewModel = koinViewModel()
 ) {
     val user by viewModel.user.collectAsState()
 
@@ -29,9 +26,7 @@ fun UserInfoScreen(
         TopAppBar(
             title = { Text(stringResource(R.string.profile)) })
     }, floatingActionButton = {
-        FloatingActionButton(onClick = {
-            navController.navigate(UserEdit)
-        }) {
+        FloatingActionButton(onClick = onEdit) {
             Icon(
                 imageVector = Icons.Default.Edit, contentDescription = stringResource(R.string.edit)
             )

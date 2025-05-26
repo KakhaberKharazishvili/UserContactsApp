@@ -4,15 +4,11 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-
-import com.example.usercontactsapp.data.navigation.Splash
-import com.example.usercontactsapp.data.navigation.UserEdit
-import com.example.usercontactsapp.data.navigation.UserForm
-import com.example.usercontactsapp.data.navigation.UserInfo
-import com.example.usercontactsapp.ui.screen.SplashScreen
-import com.example.usercontactsapp.ui.screen.UserEditScreen
-import com.example.usercontactsapp.ui.screen.UserFormScreen
-import com.example.usercontactsapp.ui.screen.UserInfoScreen
+import com.example.usercontactsapp.features.navigation.*
+import com.example.usercontactsapp.features.splash.SplashScreen
+import com.example.usercontactsapp.features.useredit.UserEditScreen
+import com.example.usercontactsapp.features.userform.UserFormScreen
+import com.example.usercontactsapp.features.userinfo.UserInfoScreen
 
 @Composable
 fun UserContactsNavGraph(navController: NavHostController) {
@@ -20,19 +16,48 @@ fun UserContactsNavGraph(navController: NavHostController) {
         navController = navController, startDestination = Splash
     ) {
         composable<Splash> {
-            SplashScreen(navController)
+            SplashScreen(onUserAvailable = {
+                navController.navigate(UserInfo) {
+                    popUpTo(Splash) {
+                        inclusive = true
+                    }
+                }
+            }, onUserMissing = {
+                navController.navigate(UserForm) {
+                    popUpTo(Splash) {
+                        inclusive = true
+                    }
+                }
+            })
         }
 
         composable<UserForm> {
-            UserFormScreen(navController)
+            UserFormScreen(
+                onSave = {
+                    navController.navigate(UserInfo) {
+                        popUpTo(UserForm) {
+                            inclusive = true
+                        }
+                    }
+                })
         }
 
         composable<UserInfo> {
-            UserInfoScreen(navController)
-        }
-        composable<UserEdit> {
-            UserEditScreen(navController)
+            UserInfoScreen(
+                onEdit = {
+                    navController.navigate(UserEdit)
+                })
         }
 
+        composable<UserEdit> {
+            UserEditScreen(
+                onSave = {
+                    navController.navigate(UserInfo) {
+                        popUpTo(UserEdit) {
+                            inclusive = true
+                        }
+                    }
+                })
+        }
     }
 }
