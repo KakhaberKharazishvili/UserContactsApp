@@ -3,29 +3,30 @@ package com.example.usercontactsapp.features.splash
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.usercontactsapp.data.repository.UserRepository
-import androidx.compose.runtime.mutableStateOf
 import com.example.usercontactsapp.features.navigation.AppDestination
 import com.example.usercontactsapp.features.navigation.UserForm
 import com.example.usercontactsapp.features.navigation.UserInfo
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
+import kotlinx.coroutines.Dispatchers
 
 class SplashViewModel(
     private val repository: UserRepository
 ) : ViewModel() {
 
-    var isLoading by mutableStateOf(true)
-        private set
+    private val _isLoading = MutableStateFlow(true)
+    val isLoading: StateFlow<Boolean> = _isLoading
 
-    var startDestination by mutableStateOf<AppDestination>(UserForm)
-        private set
+    private val _startDestination = MutableStateFlow<AppDestination>(UserForm)
+    val startDestination: StateFlow<AppDestination> = _startDestination
 
-    init {
-        viewModelScope.launch {
+    fun checkStartDestination() {
+        if (!_isLoading.value) return
+
+        viewModelScope.launch(Dispatchers.IO) {
             repository.getUser().collect { user ->
-                startDestination = if (user != null) UserInfo else UserForm
-                isLoading = false
+                _startDestination.value = if (user != null) UserInfo else UserForm
+                _isLoading.value = false
             }
         }
     }

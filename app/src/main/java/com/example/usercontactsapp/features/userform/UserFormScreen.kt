@@ -7,6 +7,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.usercontactsapp.R
 import com.example.usercontactsapp.features.sharedform.UserFormContent
 import org.koin.androidx.compose.koinViewModel
@@ -14,14 +15,10 @@ import org.koin.androidx.compose.koinViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun UserFormScreen(
-    onSave: () -> Unit, viewModel: UserFormViewModel = koinViewModel()
+    onSave: () -> Unit,
+    viewModel: UserFormViewModel = koinViewModel()
 ) {
-    val firstName by viewModel.firstName.collectAsState()
-    val lastName by viewModel.lastName.collectAsState()
-    val phone by viewModel.phone.collectAsState()
-    val email by viewModel.email.collectAsState()
-    val birthDate by viewModel.birthDate.collectAsState()
-    val imageUri by viewModel.imageUri.collectAsState()
+    val state by viewModel.state.collectAsStateWithLifecycle()
 
     val imagePickerLauncher =
         rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) { uri ->
@@ -34,28 +31,29 @@ fun UserFormScreen(
         }
     }
 
-    Scaffold(topBar = {
-        TopAppBar(title = { Text(stringResource(R.string.form_title)) })
-    }) { padding ->
+    Scaffold(
+        topBar = {
+            TopAppBar(title = { Text(stringResource(R.string.form_title)) })
+        }
+    ) { padding ->
 
         UserFormContent(
             modifier = Modifier
                 .padding(padding)
                 .fillMaxSize(),
-            firstName = firstName,
+            firstName = state.firstName,
             onFirstNameChange = viewModel::onFirstNameChange,
-            lastName = lastName,
+            lastName = state.lastName,
             onLastNameChange = viewModel::onLastNameChange,
-            phone = phone,
+            phone = state.phone,
             onPhoneChange = viewModel::onPhoneChange,
-            email = email,
+            email = state.email,
             onEmailChange = viewModel::onEmailChange,
-            birthDate = birthDate,
+            birthDate = state.birthDate,
             onBirthDateChange = viewModel::onBirthDateChange,
-            imageUri = imageUri,
+            imageUri = state.imageUri,
             onPickImage = { imagePickerLauncher.launch("image/*") },
-            onSave = {
-                viewModel.onSaveClicked()
-            })
+            onSave = { viewModel.onSaveClicked() }
+        )
     }
 }

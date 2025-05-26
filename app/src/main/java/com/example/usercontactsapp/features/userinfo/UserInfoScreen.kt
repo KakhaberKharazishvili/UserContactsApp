@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.rememberAsyncImagePainter
 import com.example.usercontactsapp.R
 import org.koin.androidx.compose.koinViewModel
@@ -20,7 +21,7 @@ import org.koin.androidx.compose.koinViewModel
 fun UserInfoScreen(
     onEdit: () -> Unit, viewModel: UserInfoViewModel = koinViewModel()
 ) {
-    val user by viewModel.user.collectAsState()
+    val user by viewModel.user.collectAsStateWithLifecycle()
 
     Scaffold(topBar = {
         TopAppBar(

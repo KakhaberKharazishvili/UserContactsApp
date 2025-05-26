@@ -5,87 +5,80 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.usercontactsapp.data.model.UserUiModel
 import com.example.usercontactsapp.data.repository.UserRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import androidx.core.net.toUri
 
 class UserEditViewModel(
     private val repository: UserRepository
 ) : ViewModel() {
 
-    private val _firstName = MutableStateFlow("")
-    val firstName: StateFlow<String> = _firstName
-
-    private val _lastName = MutableStateFlow("")
-    val lastName: StateFlow<String> = _lastName
-
-    private val _phone = MutableStateFlow("")
-    val phone: StateFlow<String> = _phone
-
-    private val _email = MutableStateFlow("")
-    val email: StateFlow<String> = _email
-
-    private val _birthDate = MutableStateFlow("")
-    val birthDate: StateFlow<String> = _birthDate
-
-    private val _imageUri = MutableStateFlow<Uri?>(null)
-    val imageUri: StateFlow<Uri?> = _imageUri
+    private val _state = MutableStateFlow(UserEditState())
+    val state: StateFlow<UserEditState> = _state
 
     private val _onSaveSuccess = MutableSharedFlow<Unit>()
-    val onSaveSuccess: SharedFlow<Unit> = _onSaveSuccess
+    val onSaveSuccess = _onSaveSuccess.asSharedFlow()
 
     private var currentUserId: Int = 0
 
     init {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             repository.getUser().collect { user ->
                 user?.let {
                     currentUserId = it.id
-                    _firstName.value = it.firstName
-                    _lastName.value = it.lastName
-                    _phone.value = it.phone
-                    _email.value = it.email
-                    _birthDate.value = it.birthDate
-                    _imageUri.value = Uri.parse(it.imageUri)
+                    _state.update { current ->
+                        current.copy(
+                            firstName = it.firstName,
+                            lastName = it.lastName,
+                            phone = it.phone,
+                            email = it.email,
+                            birthDate = it.birthDate,
+                            imageUri = it.imageUri.toUri()
+                        )
+                    }
                 }
             }
         }
     }
 
     fun onFirstNameChange(value: String) {
-        _firstName.value = value
+        _state.update { it.copy(firstName = value) }
     }
 
     fun onLastNameChange(value: String) {
-        _lastName.value = value
+        _state.update { it.copy(lastName = value) }
     }
 
     fun onPhoneChange(value: String) {
-        _phone.value = value
+        _state.update { it.copy(phone = value) }
     }
 
     fun onEmailChange(value: String) {
-        _email.value = value
+        _state.update { it.copy(email = value) }
     }
 
     fun onBirthDateChange(value: String) {
-        _birthDate.value = value
+        _state.update { it.copy(birthDate = value) }
     }
 
     fun onImageChange(uri: Uri) {
-        _imageUri.value = uri
+        _state.update { it.copy(imageUri = uri) }
     }
 
     fun onSaveClicked() {
-        viewModelScope.launch {
-            val user = UserUiModel(
-                id = currentUserId,
-                firstName = _firstName.value,
-                lastName = _lastName.value,
-                phone = _phone.value,
-                email = _email.value,
-                birthDate = _birthDate.value,
-                imageUri = _imageUri.value?.toString() ?: ""
-            )
+        val current = _state.value
+        val user = UserUiModel(
+            id = currentUserId,
+            firstName = current.firstName,
+            lastName = current.lastName,
+            phone = current.phone,
+            email = current.email,
+            birthDate = current.birthDate,
+            imageUri = current.imageUri?.toString() ?: ""
+        )
+
+        viewModelScope.launch(Dispatchers.IO) {
             repository.updateUser(user)
             _onSaveSuccess.emit(Unit)
         }
