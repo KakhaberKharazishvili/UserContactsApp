@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">UserContactsApp</string>
+    <string name="form_title">Заполните профиль</string>
+    <string name="first_name">Имя</string>
+    <string name="last_name">Фамилия</string>
+    <string name="phone">Телефон</string>
+    <string name="email">Почта</string>
+    <string name="birth_date">Дата рождения</string>
+    <string name="choose_photo">Выбрать фото</string>
+    <string name="save">Сохранить</string>
+    <string name="profile">Профиль</string>
+    <string name="edit">Редактировать</string>
 </resources>
