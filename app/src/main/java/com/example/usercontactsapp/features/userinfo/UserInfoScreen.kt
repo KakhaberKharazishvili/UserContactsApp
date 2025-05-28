@@ -19,7 +19,7 @@ import org.koin.androidx.compose.koinViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun UserInfoScreen(
-    onEdit: () -> Unit, viewModel: UserInfoViewModel = koinViewModel()
+    onEdit: () -> Unit, onOpenContacts: () -> Unit, viewModel: UserInfoViewModel = koinViewModel()
 ) {
     val user by viewModel.user.collectAsStateWithLifecycle()
 
@@ -57,6 +57,14 @@ fun UserInfoScreen(
                 Text("${stringResource(R.string.phone)}: ${it.phone}")
                 Text("${stringResource(R.string.email)}: ${it.email}")
                 Text("${stringResource(R.string.birth_date)}: ${it.birthDate}")
+
+                Spacer(modifier = Modifier.height(24.dp))
+
+                Button(
+                    onClick = onOpenContacts, modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text(stringResource(R.string.open_contacts))
+                }
             }
         } ?: Box(
             modifier = Modifier

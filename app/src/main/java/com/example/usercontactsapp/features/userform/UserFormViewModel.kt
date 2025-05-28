@@ -14,7 +14,7 @@ class UserFormViewModel(
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(UserFormState())
-    val state: StateFlow<UserFormState> = _state
+    val state: StateFlow<UserFormState> = _state.asStateFlow()
 
     private val _onSaveSuccess = MutableSharedFlow<Unit>()
     val onSaveSuccess = _onSaveSuccess.asSharedFlow()

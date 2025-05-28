@@ -1,0 +1,17 @@
+package com.example.usercontactsapp.data.repository.datasource
+
+import com.example.usercontactsapp.data.api.RandomUserApiService
+import com.example.usercontactsapp.data.local.ContactCategory
+import com.example.usercontactsapp.data.mapper.toUiModel
+import com.example.usercontactsapp.data.model.ContactUiModel
+
+class RandomUserRemoteDataSourceImpl(
+    private val api: RandomUserApiService
+) : RandomUserRemoteDataSource {
+
+    override suspend fun getRandomUser(category: ContactCategory): ContactUiModel {
+        val response = api.getRandomUser()
+        val dto = response.results.first()
+        return dto.toUiModel(category)
+    }
+}

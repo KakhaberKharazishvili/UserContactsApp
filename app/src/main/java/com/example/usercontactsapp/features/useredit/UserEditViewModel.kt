@@ -15,7 +15,7 @@ class UserEditViewModel(
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(UserEditState())
-    val state: StateFlow<UserEditState> = _state
+    val state: StateFlow<UserEditState> = _state.asStateFlow()
 
     private val _onSaveSuccess = MutableSharedFlow<Unit>()
     val onSaveSuccess = _onSaveSuccess.asSharedFlow()

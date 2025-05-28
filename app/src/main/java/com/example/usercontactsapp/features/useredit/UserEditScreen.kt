@@ -9,14 +9,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.usercontactsapp.R
-import com.example.usercontactsapp.features.sharedform.UserFormContent
+import com.example.usercontactsapp.features.components.UserFormContent
 import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun UserEditScreen(
-    onSave: () -> Unit,
-    viewModel: UserEditViewModel = koinViewModel()
+    onSave: () -> Unit, viewModel: UserEditViewModel = koinViewModel()
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
@@ -35,8 +34,7 @@ fun UserEditScreen(
     Scaffold(
         topBar = {
             TopAppBar(title = { Text(stringResource(R.string.edit)) })
-        }
-    ) { padding ->
+        }) { padding ->
 
         UserFormContent(
             modifier = Modifier
@@ -56,7 +54,6 @@ fun UserEditScreen(
             onPickImage = { imagePickerLauncher.launch("image/*") },
             onSave = {
                 viewModel.onSaveClicked()
-            }
-        )
+            })
     }
 }

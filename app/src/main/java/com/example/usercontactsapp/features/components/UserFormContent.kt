@@ -1,4 +1,4 @@
-package com.example.usercontactsapp.features.sharedform
+package com.example.usercontactsapp.features.components
 
 import android.net.Uri
 import androidx.compose.foundation.Image
@@ -70,6 +70,11 @@ fun UserFormContent(
         ) {
             Text(stringResource(R.string.choose_photo))
         }
+        Button(
+            onClick = onSave, modifier = Modifier.fillMaxWidth()
+        ) {
+            Text(stringResource(R.string.save))
+        }
 
         imageUri?.let {
             Image(
@@ -80,12 +85,6 @@ fun UserFormContent(
                     .height(200.dp),
                 contentScale = ContentScale.Crop
             )
-        }
-
-        Button(
-            onClick = onSave, modifier = Modifier.fillMaxWidth()
-        ) {
-            Text(stringResource(R.string.save))
         }
     }
 }

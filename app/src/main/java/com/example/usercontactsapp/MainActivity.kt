@@ -8,7 +8,7 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.compose.rememberNavController
 import com.example.usercontactsapp.features.splash.SplashViewModel
-import com.example.usercontactsapp.ui.navigation.UserContactsNavGraph
+import com.example.usercontactsapp.features.navigation.UserContactsNavGraph
 import com.example.usercontactsapp.ui.theme.UserContactsAppTheme
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel

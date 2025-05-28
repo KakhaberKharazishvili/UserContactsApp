@@ -10,4 +10,20 @@
     <string name="save">Сохранить</string>
     <string name="profile">Профиль</string>
     <string name="edit">Редактировать</string>
+    <string name="contacts_title">Контакты</string>
+    <string name="add_contact">Добавить контакт</string>
+    <string name="search_placeholder">Поиск по имени или фамилии</string>
+    <string name="category_family">Семья</string>
+    <string name="category_friends">Друзья</string>
+    <string name="category_work">Работа</string>
+    <string name="category_all">Все</string>
+    <string name="delete">Удалить</string>
+    <string name="contact_category_label">Категория</string>
+    <string name="add_contact_title">Добавить контакт</string>
+    <string name="get_random_user">Получить случайного пользователя</string>
+    <string name="select_category">Выберите категорию</string>
+    <string name="save_contact">Сохранить</string>
+    <string name="contact_info_title">Информация о контакте</string>
+    <string name="open_contacts">Открыть контакты</string>
+    <string name="category_format">Категория: %1$s</string>
 </resources>
