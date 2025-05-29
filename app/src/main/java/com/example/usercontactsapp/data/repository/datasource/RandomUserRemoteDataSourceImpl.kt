@@ -8,13 +8,6 @@ import com.example.usercontactsapp.presentation.model.ContactUiModel
 class RandomUserRemoteDataSourceImpl(
     private val api: RandomUserApiService
 ) : RandomUserRemoteDataSource {
-
-    override suspend fun getRandomUser(category: ContactCategory): ContactUiModel {
-        val response = api.getRandomUser()
-        val dto = response.results.first()
-        return dto.toUiModel(category)
-    }
-
     override suspend fun getRandomUsers(
         count: Int, category: ContactCategory
     ): List<ContactUiModel> {

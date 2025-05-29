@@ -18,8 +18,6 @@ class ContactListViewModel(
     private val _state = MutableStateFlow(ContactListState())
     val state: StateFlow<ContactListState> = _state.asStateFlow()
 
-    private val _onContactDeleted = MutableSharedFlow<Unit>()
-
     private var subscriptionJob: Job? = null
 
     init {
@@ -58,7 +56,6 @@ class ContactListViewModel(
     fun deleteContact(contact: ContactUiModel) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.deleteContact(contact)
-            _onContactDeleted.emit(Unit)
         }
     }
 }

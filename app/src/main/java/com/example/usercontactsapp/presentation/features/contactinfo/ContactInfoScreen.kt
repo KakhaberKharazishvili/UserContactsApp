@@ -1,6 +1,5 @@
 package com.example.usercontactsapp.presentation.features.contactinfo
 
-import com.example.usercontactsapp.data.local.ContactCategory
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -43,16 +42,6 @@ fun ContactInfoScreen(
                     verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
                     ContactDetailCard(contact = contact)
-
-                    Text(
-                        text = stringResource(
-                            when (contact.category) {
-                                ContactCategory.FAMILY -> R.string.category_family
-                                ContactCategory.FRIENDS -> R.string.category_friends
-                                ContactCategory.WORK -> R.string.category_work
-                            }
-                        ), style = MaterialTheme.typography.bodyLarge
-                    )
                 }
             } ?: run {
                 Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {

@@ -23,6 +23,7 @@ fun ContactAddScreen(
     val state by viewModel.state.collectAsStateWithLifecycle()
 
     LaunchedEffect(Unit) {
+        viewModel.loadRandomUsers()
         viewModel.onSaved.collect {
             onBack()
         }
@@ -40,14 +41,6 @@ fun ContactAddScreen(
                 .fillMaxSize(),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            item {
-                Button(
-                    onClick = viewModel::loadRandomUsers, modifier = Modifier.fillMaxWidth()
-                ) {
-                    Text(stringResource(R.string.get_random_user_list))
-                }
-            }
-
             if (state.isLoading) {
                 item {
                     Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
@@ -57,7 +50,7 @@ fun ContactAddScreen(
             }
 
             items(state.contacts) { contact ->
-                val isSelected = contact == state.selectedContact
+                val isSelected = contact.email == state.selectedContact?.email
 
                 ElevatedCard(
                     onClick = { viewModel.onSelectContact(contact) },
