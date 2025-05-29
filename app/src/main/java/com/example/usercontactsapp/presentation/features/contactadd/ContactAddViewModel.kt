@@ -22,19 +22,12 @@ class ContactAddViewModel(
     val onSaved: SharedFlow<Unit> = _onSaved.asSharedFlow()
 
     fun onSelectContact(contact: ContactUiModel) {
-        val updated = contact.copy(category = state.value.selectedCategory)
-        _state.update { it.copy(selectedContact = updated) }
+        _state.update { it.copy(selectedContact = contact) }
     }
 
 
     fun onCategoryChange(category: ContactCategory) {
-        val selected = state.value.selectedContact?.copy(category = category)
-
-        _state.update {
-            it.copy(
-                selectedCategory = category, selectedContact = selected
-            )
-        }
+        _state.update { it.copy(selectedCategory = category) }
     }
 
     fun loadRandomUsers() {
@@ -58,9 +51,11 @@ class ContactAddViewModel(
     fun saveContact() {
         state.value.selectedContact?.let { contact ->
             viewModelScope.launch(Dispatchers.IO) {
-                contactRepository.insertContact(contact)
+                val contactWithCategory = contact.copy(category = state.value.selectedCategory)
+                contactRepository.insertContact(contactWithCategory)
                 _onSaved.emit(Unit)
             }
         }
     }
 }
+
