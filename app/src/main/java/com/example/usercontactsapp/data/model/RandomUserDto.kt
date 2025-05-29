@@ -1,15 +1,15 @@
 package com.example.usercontactsapp.data.model
 
-data class RandomUserResponse(
-    val results: List<RandomUserDto>
-)
-
 data class RandomUserDto(
     val name: NameDto,
     val email: String,
     val phone: String,
     val dob: DobDto,
     val picture: PictureDto
+)
+
+data class RandomUserResponse(
+    val results: List<RandomUserDto>
 )
 
 data class NameDto(

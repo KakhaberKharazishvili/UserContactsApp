@@ -1,7 +1,7 @@
 package com.example.usercontactsapp.data.repository
 
 import com.example.usercontactsapp.data.local.ContactCategory
-import com.example.usercontactsapp.data.model.ContactUiModel
+import com.example.usercontactsapp.presentation.model.ContactUiModel
 import kotlinx.coroutines.flow.Flow
 
 interface ContactRepository {

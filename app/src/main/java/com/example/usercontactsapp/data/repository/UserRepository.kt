@@ -1,6 +1,6 @@
 package com.example.usercontactsapp.data.repository
 
-import com.example.usercontactsapp.data.model.UserUiModel
+import com.example.usercontactsapp.presentation.model.UserUiModel
 import kotlinx.coroutines.flow.Flow
 
 interface UserRepository {
