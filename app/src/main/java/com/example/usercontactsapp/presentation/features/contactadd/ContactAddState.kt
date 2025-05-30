@@ -1,6 +1,6 @@
 package com.example.usercontactsapp.presentation.features.contactadd
 
-import com.example.usercontactsapp.data.local.ContactCategory
+import com.example.domain.model.ContactCategory
 import com.example.usercontactsapp.presentation.model.ContactUiModel
 
 data class ContactAddState(

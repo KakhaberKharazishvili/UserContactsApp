@@ -3,8 +3,9 @@ package com.example.usercontactsapp.presentation.features.userform
 import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.domain.repository.UserRepository
 import com.example.usercontactsapp.presentation.model.UserUiModel
-import com.example.usercontactsapp.data.repository.UserRepository
+import com.example.usercontactsapp.presentation.model.toDomain
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -57,7 +58,7 @@ class UserFormViewModel(
             )
 
             viewModelScope.launch(Dispatchers.IO) {
-                repository.insertUser(user)
+                repository.insertUser(user.toDomain())
                 _onSaveSuccess.emit(Unit)
             }
         }

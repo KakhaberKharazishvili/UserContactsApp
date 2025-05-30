@@ -2,7 +2,7 @@ package com.example.usercontactsapp.presentation.features.splash
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.usercontactsapp.data.repository.UserRepository
+import com.example.domain.repository.UserRepository
 import com.example.usercontactsapp.presentation.features.navigation.AppDestination
 import com.example.usercontactsapp.presentation.features.navigation.UserForm
 import com.example.usercontactsapp.presentation.features.navigation.UserInfo

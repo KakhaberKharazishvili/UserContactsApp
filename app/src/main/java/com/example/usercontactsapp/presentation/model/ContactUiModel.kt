@@ -1,6 +1,7 @@
 package com.example.usercontactsapp.presentation.model
 
-import com.example.usercontactsapp.data.local.ContactCategory
+import com.example.domain.model.ContactCategory
+
 
 data class ContactUiModel(
     val id: Int = 0,
