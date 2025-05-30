@@ -2,7 +2,7 @@ package com.example.usercontactsapp.data.repository
 
 import com.example.usercontactsapp.data.local.UserDao
 import kotlinx.coroutines.flow.Flow
-import com.example.usercontactsapp.data.model.UserUiModel
+import com.example.usercontactsapp.presentation.model.UserUiModel
 import com.example.usercontactsapp.data.mapper.toEntity
 import com.example.usercontactsapp.data.mapper.toUiModel
 import kotlinx.coroutines.flow.map
