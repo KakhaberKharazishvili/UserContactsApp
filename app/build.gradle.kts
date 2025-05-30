@@ -21,12 +21,8 @@ android {
     }
 
     buildTypes {
-        debug {
-            buildConfigField("String", "BASE_URL", "\"https://randomuser.me/\"")
-        }
         release {
             isMinifyEnabled = false
-            buildConfigField("String", "BASE_URL", "\"https://randomuser.me/\"")
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
             )
@@ -41,7 +37,6 @@ android {
     }
     buildFeatures {
         compose = true
-        buildConfig = true
     }
 }
 
@@ -86,4 +81,6 @@ dependencies {
     implementation(libs.koin.androidx.compose)
     implementation(libs.converter.gson)
     implementation(libs.okhttp.logging)
+    implementation(project(":data"))
+    implementation(project(":domain"))
 }

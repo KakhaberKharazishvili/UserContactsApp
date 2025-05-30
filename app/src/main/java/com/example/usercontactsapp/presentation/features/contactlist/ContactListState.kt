@@ -1,6 +1,7 @@
 package com.example.usercontactsapp.presentation.features.contactlist
 
-import com.example.usercontactsapp.data.local.ContactCategory
+
+import com.example.domain.model.ContactCategory
 import com.example.usercontactsapp.presentation.model.ContactUiModel
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf

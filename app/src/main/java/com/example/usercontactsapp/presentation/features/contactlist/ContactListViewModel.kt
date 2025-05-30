@@ -2,9 +2,11 @@ package com.example.usercontactsapp.presentation.features.contactlist
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.usercontactsapp.data.local.ContactCategory
+import com.example.domain.model.ContactCategory
+import com.example.domain.repository.ContactRepository
 import com.example.usercontactsapp.presentation.model.ContactUiModel
-import com.example.usercontactsapp.data.repository.ContactRepository
+import com.example.usercontactsapp.presentation.model.toDomain
+import com.example.usercontactsapp.presentation.model.toUiModel
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -33,13 +35,12 @@ class ContactListViewModel(
                 else -> repository.getAllContacts()
             }
 
-            flow.collect { list ->
-                _state.update {
-                    it.copy(
-                        isLoading = false, contacts = list.toImmutableList()
-                    )
+            flow.map { list -> list.map { it.toUiModel() }.toImmutableList() }
+                .collect { contactUiList ->
+                    _state.update {
+                        it.copy(isLoading = false, contacts = contactUiList)
+                    }
                 }
-            }
         }
     }
 
@@ -55,7 +56,7 @@ class ContactListViewModel(
 
     fun deleteContact(contact: ContactUiModel) {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.deleteContact(contact)
+            repository.deleteContact(contact.toDomain())
         }
     }
 }

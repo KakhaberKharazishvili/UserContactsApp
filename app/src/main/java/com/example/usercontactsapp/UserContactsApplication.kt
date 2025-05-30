@@ -1,8 +1,8 @@
 package com.example.usercontactsapp
 
 import android.app.Application
-import com.example.usercontactsapp.di.dataModule
-import com.example.usercontactsapp.di.viewModelModule
+import com.example.usercontactsapp.presentation.features.di.viewModelModule
+import com.example.data.di.dataModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
