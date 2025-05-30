@@ -1,4 +1,4 @@
-package com.example.domain.datasource
+package com.example.data.repository.datasource
 
 import com.example.domain.model.Contact
 import com.example.domain.model.ContactCategory

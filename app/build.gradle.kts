@@ -3,7 +3,6 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.serialization)
-    id("org.jetbrains.kotlin.kapt")
 }
 
 android {
@@ -65,15 +64,10 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.compose.ui.tooling.preview)
     debugImplementation(libs.androidx.compose.ui.tooling)
-    implementation(libs.androidx.room.runtime)
-    implementation(libs.androidx.room.ktx)
-    kapt(libs.androidx.room.compiler)
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.androidx.core.splashscreen)
     implementation(libs.androidx.navigation.runtime.ktx)
     implementation(libs.kotlinx.serialization.json)
-    implementation(libs.retrofit)
-    implementation(libs.retrofit.converter.gson)
     implementation(libs.coil.compose)
     implementation(libs.collections.immutable)
     implementation(libs.androidx.lifecycle.runtime.compose)

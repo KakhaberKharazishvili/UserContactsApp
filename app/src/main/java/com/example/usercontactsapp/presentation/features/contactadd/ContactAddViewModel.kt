@@ -2,7 +2,7 @@ package com.example.usercontactsapp.presentation.features.contactadd
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.domain.datasource.RandomUserRemoteDataSource
+import com.example.data.repository.datasource.RandomUserRemoteDataSource
 import com.example.domain.model.ContactCategory
 import com.example.domain.repository.ContactRepository
 import com.example.usercontactsapp.presentation.model.ContactUiModel

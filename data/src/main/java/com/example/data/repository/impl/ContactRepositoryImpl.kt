@@ -3,7 +3,7 @@ package com.example.data.repository.impl
 import com.example.domain.model.Contact
 import com.example.domain.model.ContactCategory
 import com.example.domain.repository.ContactRepository
-import com.example.domain.datasource.LocalContactDataSource
+import com.example.data.repository.datasource.LocalContactDataSource
 import kotlinx.coroutines.flow.Flow
 
 internal class ContactRepositoryImpl(

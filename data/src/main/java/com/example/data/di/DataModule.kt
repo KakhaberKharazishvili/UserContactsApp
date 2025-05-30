@@ -11,8 +11,8 @@ import com.example.data.repository.datasource.LocalContactDataSourceImpl
 import com.example.data.repository.datasource.RandomUserRemoteDataSourceImpl
 import com.example.data.repository.impl.ContactRepositoryImpl
 import com.example.data.repository.impl.UserRepositoryImpl
-import com.example.domain.datasource.LocalContactDataSource
-import com.example.domain.datasource.RandomUserRemoteDataSource
+import com.example.data.repository.datasource.LocalContactDataSource
+import com.example.data.repository.datasource.RandomUserRemoteDataSource
 import com.example.domain.repository.ContactRepository
 import com.example.domain.repository.UserRepository
 import org.koin.dsl.module

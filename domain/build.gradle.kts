@@ -1,5 +1,5 @@
 plugins {
-    id("java-library")
+    alias(libs.plugins.java.library)
     alias(libs.plugins.jetbrains.kotlin.jvm)
 }
 java {
@@ -12,5 +12,5 @@ kotlin {
     }
 }
 dependencies {
-    implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.kotlinx.coroutines.core)
 }
