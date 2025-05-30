@@ -73,8 +73,6 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.koin.android)
     implementation(libs.koin.androidx.compose)
-    implementation(libs.converter.gson)
-    implementation(libs.okhttp.logging)
     implementation(project(":data"))
     implementation(project(":domain"))
 }
